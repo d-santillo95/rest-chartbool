@@ -6,7 +6,6 @@ $(document).ready(function() {
         var d = moment($('#input-date').val(), 'YYYY-MM-DD');
         name = name.charAt(0).toUpperCase() + name.slice(1);
         d = d.format('DD/MM/YYYY');
-        console.log(amm);
         var dat = {
             amount: amm,
             salesman: name,
@@ -15,10 +14,19 @@ $(document).ready(function() {
         call_ajax('POST', dat);
     });
 
+    $('.container-sales').on( "mouseenter", 'i', function(e) {
+        $(e.target).closest('.row').addClass('active');
+    });
+
+    $('.container-sales').on( "mouseleave", 'i', function(e) {
+        $(e.target).closest('.row').removeClass('active');
+    });
+
     $('.container-sales').on( "click", 'i', function(e) {
+        $(e.target).closest('.row').hide(300);
         var id ='/';
         id += $(e.target).closest('.delete').prev('.sale-details').attr('data-id');
-        call_ajax('DELETE', {}, id);
+        setTimeout(call_ajax, 350, "DELETE", {}, id);
     });
 });
 
@@ -30,10 +38,9 @@ function call_ajax(met = 'GET', dat = {}, id = '', port = 4026) {
         success: function(data) {
             if (met == 'GET') {
                 $('.container-sales').html('');
-                $('canvas').attr('style', '');
-                $('canvas').attr('class', '');
-                $('canvas').attr('height', '');
-                $('canvas').attr('width', '');
+                $('.container-chart-m').html('<canvas id="chart-m"></canvas>')
+                $('.container-chart-s').html('<canvas id="chart-s"></canvas>')
+                $('.container-chart-q').html('<canvas id="chart-q"></canvas>')
                 var datas = create_data(data);
                 for (var key in datas) {
                     switch (key) {
