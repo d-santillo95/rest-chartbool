@@ -1,9 +1,12 @@
 $(document).ready(function() {
     call_ajax();
     $('#rec').click(function() {
-        var name = $('#input-name').val().toLowerCase();
+        var name = $('#input-name').val().trim().toLowerCase();
         var amm = parseInt($('#input-amount').val());
         var d = moment($('#input-date').val(), 'YYYY-MM-DD');
+         $('#input-name').val('');
+         $('#input-amount').val('');
+         $('#input-date').val('');
         name = name.charAt(0).toUpperCase() + name.slice(1);
         d = d.format('DD/MM/YYYY');
         var dat = {
@@ -23,10 +26,10 @@ $(document).ready(function() {
     });
 
     $('.container-sales').on( "click", 'i', function(e) {
-        $(e.target).closest('.row').hide(300);
+        $(e.target).closest('.row').addClass('removed');
         var id ='/';
         id += $(e.target).closest('.delete').prev('.sale-details').attr('data-id');
-        setTimeout(call_ajax, 350, "DELETE", {}, id);
+        setTimeout(call_ajax, 550, "DELETE", {}, id);
     });
 });
 
@@ -133,15 +136,15 @@ function create_line_chart(datas) {
                 }]
             },
             tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var label = data.datasets[tooltipItem.datasetIndex].label + ': ';
-                            label += tooltipItem.yLabel;
-                            label += ' €';
-                            return label;
-                        }
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label + ': ';
+                        label += tooltipItem.yLabel;
+                        label += ' €';
+                        return label;
                     }
                 }
+            }
         }
     });
 }
@@ -167,6 +170,18 @@ function create_pie_chart(datas) {
             ],
             borderWidth: 3
             }]
+        },
+        options: {
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.labels[tooltipItem.index] + ': ';
+                        label += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                        label += '%';
+                        return label;
+                    }
+                }
+            }
         }
     });
 }

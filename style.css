@@ -50,6 +50,10 @@ button{
     margin-left: 25px;
 }
 
+.container-sales{
+    overflow-x: hidden;
+}
+
 .row{
     padding: 0 15px;
     margin: 25px;
@@ -58,6 +62,7 @@ button{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color, .7s;
 }
 
 .row.active{
@@ -66,6 +71,10 @@ button{
 
 .row p{
     padding: 5px 0;
+}
+
+.row span{
+    font-weight: bold;
 }
 
 .delete i{
@@ -77,4 +86,40 @@ button{
 
 .delete i:hover{
     transform: scale(1.3);
+}
+
+.row.removed {
+
+  -webkit-animation: disapear .5s;
+  -webkit-animation-fill-mode: forwards;
+  animation: disapear .5s;
+  animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes disapear{
+
+  50% {
+
+    -webkit-transform: translateX(-5%);
+    transform: translateX(-5%);
+  }
+
+  100% {
+    -webkit-transform: translateX(200%);
+    transform: translateX(200%);
+  }
+}
+
+@keyframes disapear{
+
+  50% {
+
+    -webkit-transform: translateX(-5%);
+    transform: translateX(-5%);
+  }
+
+  100% {
+    -webkit-transform: translateX(200%);
+    transform: translateX(200%);
+  }
 }

@@ -31,15 +31,22 @@
                 <div class="container-form">
                     <div class="">
                         <label for="input-name">Inserire nome venditore</label>
-                        <input id="input-name" type="text" placeholder="Nome venditore">
+                        <input id="input-name" type="text" placeholder="Nome venditore" list="names">
+                        <datalist id="names">
+                            <option value="Giovanni">
+                            <option value="Roberto">
+                            <option value="Riccardo">
+                            <option value="Marco">
+                            <option value="Daniele">
+                        </datalist>
                     </div>
                     <div class="">
                         <label for="input-amount">Inserire ammontare vendita</label>
-                        <input id="input-amount" type="text" placeholder="Ammontare vendita in euro">
+                        <input id="input-amount" type="number" placeholder="Ammontare vendita in euro">
                     </div>
                     <div class="">
                         <label for="input-date">Inserire data vendita</label>
-                        <input id="input-date" type="date" id="start" name="trip-start" value="2017-01-11" min="2017-01-01" max="2017-12-31">
+                        <input id="input-date" type="date" name="trip-start" value="" min="2017-01-01" max="2017-12-31">
                     </div>
                     <div>
                         <button id="rec" type="button" name="button">Vendita effetuata</button>
@@ -51,9 +58,9 @@
     <script id="sale-template" type="text/x-handlebars-template">
         <div class="row">
             <div class="sale-details" data-id = {{ id }}>
-                <p>Venditore: {{ salesman }}</p>
-                <p>Ammontare vendita: {{ amount }}€</p>
-                <p>Data vendita: {{ date }}</p>
+                <p>Venditore: <span>{{ salesman }}</span></p>
+                <p>Ammontare vendita: <span>{{ amount }}€</span></p>
+                <p>Data vendita: <span>{{ date }}</span></p>
             </div>
             <div class="delete">
                 <i class="far fa-trash-alt"></i>
